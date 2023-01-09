@@ -1,0 +1,29 @@
+Egy kis szabóságban ingeket és szoknyákat varrnak. Egy ingen 4$, egy szoknyán
+3$ nyeresége van a szabóságnak. Egy ing 3 m anyagból 5 óra alatt, egy szoknya
+4 m anyagból 2 óra alatt készül el. A cég vezetője azt várja el a varrónőktől, hogy
+a napi 10 órás munkaidő alatt legalább 4 ruhadarabot készítsenek el, legfeljebb 12
+m anyag felhasználásával. Hány ing és hány szoknya megvarrásával érhető el egy
+varrónő esetén a maximális profit?
+
+Kidolgozás:
+
+var Ing >=0 integer;
+var Szoknya >=0 integer;
+
+s.t. Anyag:
+	3*Ing + 4*Szoknya <= 12;
+
+s.t. Ido:
+	5*Ing + 2*Szoknya <= 10;
+
+s.t. OsszesElkeszitettRuha:
+	Ing + Szoknya >= 4;
+
+maximize Ruhak:
+	4*Ing + 3*Szoknya;
+
+end;
+
+Megoldás:
+
+A feladatnak nincs megoldása.
