@@ -1,0 +1,34 @@
+Egy építési vállalkozó kétféle csarnokot épít.
+Az 'A' jelű csarnokhoz 4000 m2 lemez, 4 tonna acél, 300 m2 tetőfedő anyag és 200 m3 beton kell, míg
+a 'B' jelűhöz 5000 m2 lemez 3 tonna acél, 200 m2 tetőfedő anyag és 100 m3 beton.
+Az 'A' csarnokon 4000$, a 'B'-n 5000$ haszon van.
+Összesen rendelkezésünkre áll 32000 m2 lemez, 24 tonna acél, 2000 m2 tetőfedő anyag valamint 1600 m3 beton.
+Melyik csarnokból mennyit kell építeni ahhoz, hogy az építési vállalkozó maximalizálhassa a bevételét?
+
+Kidolgozás:
+
+var A_Csarnok >=0 integer;
+var B_Csarnok >=0 integer;
+
+s.t. Lemez:
+	4000*A_Csarnok + 5000*B_Csarnok <= 32000;
+
+s.t. Acel:
+	4*A_Csarnok + 3*B_Csarnok <= 24;
+
+s.t. Tetofedo_Anyag:
+	300*A_Csarnok + 200*B_Csarnok <= 2000;
+
+s.t. Beton:
+	200*A_Csarnok + 100*B_Csarnok <= 1600;
+
+maximize Bevetel:
+	4000*A_Csarnok + 5000*B_Csarnok;
+
+end;
+
+Megoldás:
+'A' csarnok: 3db
+'B' csarnok: 4 db
+
+Bevétel: 32000$
