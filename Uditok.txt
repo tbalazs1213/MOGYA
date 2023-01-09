@@ -1,0 +1,80 @@
+Van 3 gyárunk Töltéstava, Komárom és Dunaszerdahely településeken. Üdítőt gyártunk.
+Töltéstaván napi 100 l, Komáromban napi 400 l és Dunaszerdahelyen pedig napi 250 l üdítőt
+gyártanak. Minden nap el kell szállítanunk az összes legyártott üdítőt a gyárakból, mert sajnos nem
+tudjuk őket tárolni.
+
+A következő települések boltjaiba tudunk szállítani: Seregélyes, Győr, Ásványráró és Szolnok.
+A boltoknak is van természetesen kapacitása, hogy mennyit képes átvenni tőlünk 1-1 alkalommal.
+Seregélyesre vihetünk 100 l-t, Győrbe 350l-t, Ásványráróra 50 l-t és Szolnokra pedig 250 l üdítőt
+vihetünk.
+
+A szállítási költségünk 10Ft/km.
+
+Honnét hova mennyit kell szállítanom, hogy a legjobban kifizetődő legyen nekem?
+
+Az egyes települések közötti megtett távokat az alábbi táblázatban szemléltetem:
+                    Seregélyes	Győr	Ásvanyráró	Szolnok
+     Töltéstava	    80		    	10		35		    	190
+     Komárom		    70		    	35		50		    	150
+     Dunaszerdahely	120		    	55		80		    	200
+     
+Kidolgozás:
+
+set Gyarak;
+set Boltok;
+
+var Kiszallitas{Gyarak, Boltok} >=0 integer;
+
+param Eloallitas{Gyarak};
+param Kapacitas{Boltok};
+
+param SzallitasiKoltseg;
+
+param Tavolsagok{Gyarak, Boltok};
+
+s.t. Kiszallitasok{gyar in Gyarak}:
+     sum{bolt in Boltok} Kiszallitas[gyar, bolt] = Eloallitas[gyar];
+
+s.t. Kapacitasok{bolt in Boltok}:
+     sum{gyar in Gyarak} Kiszallitas[gyar, bolt] <= Kapacitas[bolt];
+
+minimize Koltsegek:
+     sum{gyar in Gyarak, bolt in Boltok} Tavolsagok[gyar, bolt] * Kiszallitas[gyar, bolt] * SzallitasiKoltseg;
+
+solve;
+data;
+
+set Gyarak := Toltestava Komarom Dunaszerdahely;
+set Boltok := Seregelyes Gyor Asvanyraro Szolnok;
+
+param Eloallitas :=
+     Toltestava 100
+     Komarom 400
+     Dunaszerdahely 250
+;
+
+param Kapacitas :=
+     Seregelyes 100
+     Gyor 350
+     Asvanyraro 50
+     Szolnok 250
+;
+
+param SzallitasiKoltseg 10;
+
+param Tavolsagok :
+                    Seregelyes	Gyor	Asvanyraro	Szolnok :=
+     Toltestava	    80			10		35			190
+     Komarom		70			35		50			150
+     Dunaszerdahely	120			55		80			200
+;
+
+end;
+
+Megoldás:
+
+Töltéstava -> Győr 100 l
+Komárom -> Seregélyes 100 l
+Komárom -> Ásványráró 50 l
+Komárom -> Szolnok 250 l
+Dunaszerdahely -> Győr 250
