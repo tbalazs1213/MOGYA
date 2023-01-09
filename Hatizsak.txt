@@ -1,0 +1,38 @@
+Egy hátizsák gyártó cégnél kétféle modellt gyártanak: Túra és Mini modelleket.
+Mindkettő ugyanabból a poliészterből készül. A cég az anyag beszállítójával hosszútávú szerződést
+kötött, aminek keretében hetente 5400m2 anyagot dolgozhat fel. A Túra modell egy darabjához 3m2, a
+Mini modell egy darabjához 2m2 anyagra van szükség. Piackutatási eredmények szerint a Túra modellből
+legfeljebb 1000, a Mini-ből pedig legfeljebb 1200 darabot tudnak hetente értékesíteni. A Túra 
+hátizsák elkészítése 45 perc, a Mini 40 perc munkaidőt vesz igénybe. Egy darab Túra hátizsákon 32$ 
+hasznuk van, míg egy darab Minin 24$. A cégnél 35 dolgozó foglalkozik közvetlenül a hátizsákok 
+készítésével, fejenként heti 40 óra munkaidőben. Adjunk tanácsot a cégvezetésnek, hogy mennyit érdemes
+az egyes hátizsákokból hetente készíteni!
+
+Kidolgozás:
+
+var Tura_Hatizsak >=0 integer;
+var Mini_Hatizsak >=0 integer;
+
+s.t. Polieszter:
+	3*Tura_Hatizsak + 2*Mini_Hatizsak <= 5400;
+
+s.t. Ido:
+	45*Tura_Hatizsak + 40*Mini_Hatizsak <= 35*2400;
+
+s.t. Tura_Hzs:
+	Tura_Hatizsak <= 1000;
+
+s.t. Mini_Hzs:
+	Mini_Hatizsak <= 1200;
+
+maximize Bevetel:
+	32*Tura_Hatizsak + 24*Mini_Hatizsak;
+
+end;
+
+Megoldás:
+
+Túra: 1000 db/hét
+Mini: 975 db/hét
+
+Bevétel: 55400 $/hét
